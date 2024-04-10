@@ -1,0 +1,156 @@
+/*Espaciando barra de busqueda e iconos pero al cambiar tamaño de pantalla completa se esconden
+.logo__item{
+    margin-right: 200px;
+}
+
+.cabecera__buscar__item{
+margin-right: 200px;
+}*/ 
+
+.cabecera__container{ /*POSICIONAMIENTO CABECERA*/
+    display: flex; /*Es necesario aplicar display: flex al contenedor padre de los elementos que deseas alinear con Flexbox*/
+    justify-content: space-between; /*resuelve el problema del cambio de tamaño*/
+    align-items: center;
+    position: fixed; /*Para que la cabecera se quede fija, incluyendo el top*/
+    top: 0;
+}
+
+
+/*OCULTAR CAMPO DE BUSQUEDA PARA CELULARES*/
+
+.cabecera__buscar__item{ 
+display: none; /*Lo oculta pero tambien para la compu*/
+
+}
+
+.menu__container{ /*MENÚ*/
+    position: fixed; /*Como vamos a trabajar con la versión móvil primero, voy a llamar a la propiedad position. Y voy a decir que va a tener un valor fijo, porque en la versión para móviles, el menú está en la parte inferior y en la posición horizontal.*/
+    bottom:0%; /*También vamos a volver al proyecto. Vemos que ahora está en el lado izquierdo, el menú, pero está en la parte superior. Entonces, vamos a ponerlo en la parte inferior. Para esto, voy a llamar a la propiedad bottom. Y voy a decir que va a tener un valor de 0%.*/
+    height: 75px; /*modifica la altura*/
+    width: 100%; /*Necesitamos que abarque completamente el espacio de nuestra página. Entonces, para eso, llamo a la propiedad width. Y voy a decir que va a tener un espacio de 100%. Para que abarque todo el tamaño del body. Y con eso, conseguimos que el menú quede en la parte inferior y abarque todo el espacio del body.*/
+}
+
+.menu__lista{
+    display: flex;
+    justify-content: space-around; /*espacio entre cada elemento*/
+    height: 100%; 
+}
+
+.menu__lista li{ /*alineamiento de los elementos*/
+align-self: center; 
+}
+
+.menu__itens{
+    display: flex; /*necesitamos colocar los elementos uno encima del otro*/
+    flex-direction: column; /*para colocar el icono arriba del texto*/
+    gap: 10px; /*espacio entre icono y texto*/
+
+}
+/* la pseudo-clase nth-child organiza y podemos trabajar varios elementos en función de su posición entre un grupo de hermanos. Dentro de estos paréntesis, voy a estar colocando el número del elemento que quiero ocultar. En este caso, son tres, entonces voy a repetir este código. Tenemos que la lista que quiero mantener, está en la línea 47, y quiero ocultar las siguientes. Entonces, ¿cuál sería el número de estos elementos? Sería la lista 2, la lista 3 y la lista 4. Y con estos números, vamos a estar trabajando. Este número, lo voy a pasar dentro de los paréntesis. Voy a poner 2, 3 y 4. Con eso, consigo seleccionar estos elementos. Vean que aquí abajo en el visual, ya hubo un cambio, ya hubo una diferencia. Puse un scroll en medio. Entonces, quedó un poco diferente*/
+.menu__lista:nth-child(2),
+.menu__lista:nth-child(3),
+.menu__lista:nth-child(4){
+    display: none; /*se ocultan las demás listas*/
+}
+
+
+.superior__seccion__container{ /*SECCION SUPERIOR*/
+    display: flex; /*con esto conseguimos que los elementos se posicionen uno al lado del otro pero pegados a la parte superior*/
+    align-items: center; /*ahora los elementos se ubican en el centro del contenedor, pero los textos grandes se dividen en dos*/
+    white-space: nowrap; /*podriamos estar trabajando con flex box pero no es ideal porque hay elementos especificos para alinear textos como white space y el valor nowrap para que no se divida el texto de esos elementos*/
+    overflow: scroll; /*barra de desplazamiento*/
+    /*como necesitamos un espacio entre cada elementos de la lista pero no podemos darlo uno por uno entonces encapsulamos todo en la propiedad gap*/
+    gap:15px;
+}
+
+.videos__item{ /*VIDEOS*/
+/*Para la versión de escritorio, tienen que aparecer todos los vídeos, uno al lado del otro.*/
+height: 303px;
+width: 380px; /*ponemos las dimensiones para el visual de cada video*/
+flex-grow: 1; /*Como queremos que los elementos se distribuyan, aprovechando el espacio proporcionalmente en el contenedor, para eso nos ayuda esta propiedad. Vamos a añadirla en la clase VideosItem, porque queremos aplicarla en cada uno de los elementos. Entonces vamos a añadir lo que sería flex-grow. Y voy a dar un valor de 1, porque quiero que el espacio entre los elementos sea proporcional. También esta propiedad flex-grow, respeta lo que sería el espacio del elemento. Indicamos que el espacio del elemento es de 280 píxeles. Ella va a respetar también ese espacio del elemento y va a intentar aumentar el elemento proporcionalmente hasta que ya no tenga más espacio para crecer*/
+}
+
+.videos__container{
+    display: flex; /*videos uno al lado del otro*/
+    flex-wrap: wrap; /*distribución de los videos en cada contenedor pero aún no ocupa el 100% del espacio por lo que hace falta la instrucción de la línea 70*/
+    gap:10px; /*espacio entre cada uno de los videos*/
+
+}
+
+.rodapie__container{ /*POSICIONAMIENTO PIE DE PAGINA*/
+    /*Necesitamos que el pie de pagina se distribuya en varias columnas, por ellos usamos la herramienta flex*/
+
+    display: flex; /*display: flex hace que el contenedor se expanda ocupando todo el ancho del diseño, de esta manera, los otros contenedores con el mismo valor de display se colocan uno debajo del otro, en dirección vertical. En cambio, display: inline-flex utiliza las mismas características de visualización que display: inline, mostrando los elementos en línea, en horizontal, sin ocupar todo el ancho del diseño.*/
+
+
+   /* flex-direction: column; *//*formato deseado*/
+   /* flex-wrap:wrap;*/ /*Esta instrucción es la que hace que se adapten a columnas, sin embargo para dispositivos tablet no está respetando lo espacios en las columnas. Podríamos usar el justify content pero necesitamos aplicar la propiedad sólo para tabletas por lo que usaremos la tecnica del @media*/
+   flex-flow: column wrap; /*esta instruccion hace las mismas funciones que el direction y el wrap*/
+
+}
+
+@media(min-width:834px){ /*Los media queries muestran u ocultan cierto bloque de código cuando una condición se cumple, dentro de los paréntesis voy a colocar valores son los puntos de ruptura o breakpoints donde se va a romper la vista o se va a ajustar para los diferentes dispositivos. Este código significa que todo lo que colocamos dentro de las llaves solo se mostrará cuando los dispositivos tengan al menos 834 píxeles de espacio. Esa es la condición*/
+    .cabecera__buscar__item{
+        display: block;
+    }
+
+.rodapie__container{ 
+justify-content: space-between;
+}
+
+.menu__container{ /*para tabletas con ancho de 74px*/
+    left: 0;
+    height: auto;
+    width: 74px;
+    top: 80px;
+}
+
+.menu__lista{ /*acomodo de los iconos*/
+    flex-direction: column;
+    justify-content: flex-start; /*items are packed toward the start of the flex-direction*/
+    padding-top: 15px;
+    gap: 33px;
+}
+}
+
+@media(min-width:1440px){ /*adaptar este menú para dispositivos que al menos tengan 1400 píxeles de ancho para dispositivos de tablet o computadoras de escritorio*/
+    .menu__container{
+        width: 239px;
+        overflow: scroll; /*podemos visualizar todos los elementos que están dentro de las listas*/
+    }
+    .menu__lista:nth-child(2),
+    .menu__lista:nth-child(3),
+    .menu__lista:nth-child(4){
+    display: flex; /*con esto deberían estar apareciendo las listas, pero no lo están haciendo. Vamos a entender por qué cuando podemos estar utilizando el inspeccionador, el derecho a inspeccionar dentro del proyecto. Y vamos a entender qué está sucediendo. Nos posicionamos, abrimos el body y buscamos lo que sería esa sección que es la SAG. Si nos ubicamos, ahí está sombreándose lo que tenemos, y vemos que la lista está ocupando el 100% del contenedor, tenemos un height de 100%. Y por eso es que el resto de las listas no está teniendo espacio para visualizarse.*/
+}
+.menu__lista{
+    height: auto; /*visualizar las demás listas. Pero solo se están visualizando algunas, aún faltan listas para mostrar.*/
+    padding: 20px 17px 20px 15px; /*en el menú tenemos un comportamiento aún diferente que es que cada vez que posicionamos el mouse sobre uno de los elementos hay un efecto encima de él que es un azul no es claro. Eso ya está en el código dentro del archivo estilos.css. En el diseño predet. podemos arreglarlo utilizando la propiedad padding para delimitar este tipo de efectos en los contenedores. Entonces con eso ahora si visualizamos ese efecto no se aplica a todo el ancho del contenedor sino que solo en lo que sería el menú o el elemento.*/
+    gap: 15px; /*para reducir el espacio entre un elemnto de arriba y abajo*/
+}
+
+.menu__lista:nth-child(3){ /*en el diseño predet. la lista 3 está al revés entonces debemos organizarla*/
+    flex-direction: column-reverse; /*revertir orden de los elementos*/
+
+}
+.menu__itens{
+    flex-direction: row; /*para ubicar un elemento uno al lado del otro, en este caso el icono al lado del texto*/
+    gap: 15px; /*espacio entre icono y texto*/
+    align-items: center; /*para centrar icono y texto a la misma altura*/
+}
+
+.videojuegos{ /*En el diseño predet. los elementos de la lista 4 tienen cierto orden. Order es una propiedad de los elementos hijos. Ella trabaja nuevamente con elementos individuales. Puede ordenar cada uno de los elementos y darle esa posición. Por ahora podemos usar esta propiedad pero si el proyecto necesitara ser leído por un lector de pantalla no es recomendable porque los lectores leen los elementos como están declarados en html*/
+    order: 3; /*tercera posición*/
+}
+
+.peliculas{
+    order: 2;
+}
+
+.premium{
+    order: 1;
+}
+
+
+
+}
